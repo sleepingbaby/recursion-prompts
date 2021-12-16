@@ -102,7 +102,6 @@ var exponent = function(base, exp) {
 var powerOfTwo = function(n) {
   if (n === 1) return true;
   if (n <= 0) {
-    console.log(n);
     return false;
   }
   return powerOfTwo(n/2.0);
@@ -542,6 +541,18 @@ var numToText = function(str) {
 
 // 37. Return the number of times a tag occurs in the DOM.
 var tagCount = function(tag, node) {
+  node = node || document.body;
+  var count = 0;
+  if (node.tagName && node.tagName.toLowerCase() === tag) {
+    count++;
+  }
+  if (node.hasChildNodes()) {
+    for (var i = 0; i < node.childNodes.length; i++) {
+      count += (tagCount(tag, node.childNodes[i]))
+    }
+  }
+
+  return count;
 };
 
 // 38. Write a function for binary search.
